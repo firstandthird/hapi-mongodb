@@ -1,9 +1,10 @@
 'use strict';
 
-const Hapi = require('hapi');
-const Hoek = require('hoek');
-const Lab = require('lab');
+const Hapi = require('@hapi/hapi');
+const Hoek = require('@hapi/hoek');
+const Lab = require('@hapi/lab');
 const Mongodb = require('mongodb');
+
 const { describe, it, beforeEach, expect } = exports.lab = Lab.script();
 
 describe('Hapi server', () => {
@@ -72,7 +73,7 @@ describe('Hapi server', () => {
         });
     });
 
-    it('should log configuration upon successfull connection', async () => {
+    it('should log configuration upon successful connection', async () => {
 
         let logEntry;
         server.events.once('log', (entry) => {
@@ -113,6 +114,7 @@ describe('Hapi server', () => {
             connected = true;
             return Promise.resolve({ db: () => 'test-db' });
         };
+
         await server.register({
             plugin: require('../'),
             options: {
@@ -323,5 +325,18 @@ describe('Hapi server', () => {
         await server.initialize();
         await server.stop();
         await Hoek.wait(100); // Let the connections end.
+    });
+
+    it('should be able to find the plugin exposed objects', async () => {
+
+        await server.register({
+            plugin: require('../'),
+            options: {
+                url: 'mongodb://localhost:27017'
+            }
+        });
+
+        const res = await server.plugins['hapi-mongodb'].db.collection('test').find().toArray();
+        expect(res).to.equal([]);
     });
 });
