@@ -18,21 +18,15 @@
   "bugs": {
     "url": "https://github.com/Marsup/hapi-mongodb/issues"
   },
-  "engines": {
-    "node": ">= 8"
-  },
   "dependencies": {
     "joi": "^17.2.1",
-    "mongodb": "^3.2.3"
+    "mongodb": "^3.6.3"
   },
   "devDependencies": {
     "@hapi/code": "^8.0.2",
-    "@hapi/hapi": "^18.4.1",
+    "@hapi/hapi": "^20.0.3",
     "@hapi/hoek": "^9.1.0",
     "@hapi/lab": "^24.1.0",
     "bluebird": "3.x.x"
-  },
-  "peerDependencies": {
-    "@hapi/hapi": ">= 18.0.0"
   }
 }

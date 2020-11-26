@@ -13,7 +13,7 @@ describe('Hapi server', () => {
 
     beforeEach(() => {
 
-        server = Hapi.Server();
+        server = Hapi.server();
     });
 
     it('should reject invalid options', async () => {
